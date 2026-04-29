@@ -4,7 +4,7 @@ An AI-powered data analytics tool designed for the Real Estate industry. This ap
 
 ## 🎯 Project Overview
 
-Customer Analysis ChatBot solves the challenge of non-technical users needing to extract insights from complex Excel spreadsheets. By leveraging the **Gemini 1.5 Flash** model and **Pandas**, it converts plain English questions into precise data queries.
+Customer Analysis ChatBot solves the challenge of non-technical users needing to extract insights from complex Excel spreadsheets. By leveraging the **gemini-3.1-flash-lite-preview** model and **Pandas**, it converts plain English questions into precise data queries.
 
 ### How it works:
 1. **NL to Code**: Gemini analyzes the user's question and the Excel schema to generate specific Pandas code.
