@@ -1,0 +1,24 @@
+# Environment variables (contains secret API keys)
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+pdf_text.txt
+Generative AI Intern Assignment.pdf
