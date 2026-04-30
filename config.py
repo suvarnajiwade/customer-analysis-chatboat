@@ -58,8 +58,5 @@ EXAMPLE_QUERIES: list = [
     "List customers looking for 2BHK in Pune",
     "What is the average budget?",
     "Give a summary of all high-intent customers",
-    "Which location has the most customers?",
-    "Show customers with Connected call status",
-    "What is the highest budget customer's name?",
     "How many customers want 3BHK?",
 ]
