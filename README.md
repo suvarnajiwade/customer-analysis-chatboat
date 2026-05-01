@@ -13,6 +13,18 @@ Customer Analysis ChatBot solves the challenge of non-technical users needing to
 
 ---
 
+## 🖼️ UI Screenshots
+
+### 1. Main Dashboard
+![Main Dashboard](dashboard.png)
+*The sleek, glassmorphism-styled dashboard with the welcome card and sidebar metrics.*
+
+### 2. Intelligent Query Output
+![Sample Output](output_sample.png)
+*Example of a natural language query being processed into a human-readable summary with visible logic.*
+
+---
+
 ## 🚀 Getting Started
 
 ### 1. Prerequisites

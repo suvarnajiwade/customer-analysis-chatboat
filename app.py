@@ -78,6 +78,10 @@ if "messages" not in st.session_state:
 if "engine" not in st.session_state:
     st.session_state.engine = ChatEngine()
 
+# State for processing a button-clicked query
+if "active_query" not in st.session_state:
+    st.session_state.active_query = None
+
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.title(f"{APP_ICON} {APP_TITLE}")
@@ -104,15 +108,25 @@ with st.sidebar:
     st.divider()
     
     st.subheader("💡 Example Queries")
-    st.caption("Click to try:")
     for query in EXAMPLE_QUERIES:
-        if st.button(query, use_container_width=True, key=query):
-            # Programmatically set the chat input is not direct in streamlit, 
-            # so we manually append to messages
-            st.session_state.messages.append({"role": "user", "content": query})
-            
-    if st.button("🗑️ Clear Chat History", use_container_width=True, type="secondary"):
+        if st.button(query, use_container_width=True):
+            st.session_state.active_query = query
+            st.rerun()
+
+    st.divider()
+    
+    # Chat History / Recent Questions Bar
+    st.subheader("📜 Recent Questions")
+    user_questions = [m["content"] for m in st.session_state.messages if m["role"] == "user"]
+    if user_questions:
+        for q in reversed(user_questions[-5:]): # Show last 5
+            st.caption(f"• {q}")
+    else:
+        st.caption("No questions yet.")
+
+    if st.button("🗑️ Clear Chat", use_container_width=True, type="secondary"):
         st.session_state.messages = []
+        st.session_state.active_query = None
         st.rerun()
 
 # ── Main Chat Interface ──────────────────────────────────────────────────────
@@ -139,14 +153,16 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
         if "code" in message:
-            with st.expander("🛠️ View Computed Code"):
+            with st.expander("🔍 View logic", expanded=False):
                 st.code(message["code"], language="python")
-        if "data" in message and message["data"] is not None:
-             with st.expander("📋 View Raw Result"):
-                st.write(message["data"])
 
-# Chat Input
-if prompt := st.chat_input("Ask about your customers..."):
+# Processing Logic
+prompt = st.chat_input("Ask about your customers...")
+if st.session_state.active_query:
+    prompt = st.session_state.active_query
+    st.session_state.active_query = None # Reset after grabbing
+
+if prompt:
     # Add user message to history
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
@@ -159,18 +175,13 @@ if prompt := st.chat_input("Ask about your customers..."):
             
             st.markdown(response["summary"])
             
-            # Show code and data in sub-sections
-            with st.expander("🛠️ View Computed Code"):
+            # Subtler logic view (Raw result removed as requested)
+            with st.expander("🔍 View logic", expanded=False):
                 st.code(response["generated_code"], language="python")
-            
-            if response["raw_result"] is not None:
-                with st.expander("📋 View Raw Result"):
-                    st.write(response["raw_result"])
             
             # Save assistant response to history
             st.session_state.messages.append({
                 "role": "assistant", 
                 "content": response["summary"],
-                "code": response["generated_code"],
-                "data": response["raw_result"]
+                "code": response["generated_code"]
             })
