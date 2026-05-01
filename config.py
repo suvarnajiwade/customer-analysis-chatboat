@@ -26,7 +26,7 @@ if not GEMINI_API_KEY:
 
 # ── Model Settings ──────────────────────────────────────────────────────────────
 # Model used for code generation and summarization
-GEMINI_MODEL: str = "gemini-1.5-flash"
+GEMINI_MODEL: str = "gemini-3.1-flash-lite-preview"
 
 # Temperature for code generation (low = more deterministic/accurate)
 CODE_GEN_TEMPERATURE: float = 0.1

@@ -72,6 +72,20 @@ Start the Streamlit interface:
 ```bash
 streamlit run app.py
 ```
+
+### 6. Run with Docker (Alternative)
+If you have Docker installed, you can run the app without installing Python locally:
+
+```bash
+# Build the image
+docker build -t customer-chatboat .
+
+# Run the container
+docker run -p 8501:8501 --env-file .env customer-chatboat
+
+# OR use Docker Compose (Simplest)
+docker-compose up --build
+```
 The app will automatically open in your default browser at `http://localhost:8501`.
 
 ---
