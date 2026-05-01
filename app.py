@@ -142,9 +142,7 @@ if not st.session_state.messages:
             You can ask me questions about your leads in plain English, and I will generate 
             precise data insights for you.
         </p>
-        <p style="background: #f0f7ff; padding: 10px 15px; border-radius: 10px; color: #0056b3; font-weight: 500; display: inline-block;">
-            
-        
+        </p>
     </div>
     """, unsafe_allow_html=True)
 
